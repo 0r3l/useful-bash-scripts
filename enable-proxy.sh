@@ -1,13 +1,15 @@
 #!/bin/sh
 
 function enableproxy() {
-  export HTTP_PROXY=http://one.proxy.att.com:8080
-  export HTTPS_PROXY=http://one.proxy.att.com:8080
+  proxy_url=http://pxyapp.proxy.att.com:8080/
+  export HTTP_PROXY=${proxy_url}
+  export HTTPS_PROXY=${proxy_url}
   export http_proxy=$HTTP_PROXY
   export https_proxy=$HTTPS_PROXY
-  git config --global http.proxy http://one.proxy.att.com:8080
-  git config --global https.proxy http://one.proxy.att.com:8080
-  npm config set proxy http://one.proxy.att.com:8080
+  export no_proxy=localhost
+  git config --global http.proxy ${proxy_url}
+  git config --global https.proxy ${proxy_url}
+  npm config set proxy ${proxy_url}
 }
 
 enableproxy
