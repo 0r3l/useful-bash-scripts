@@ -8,6 +8,8 @@ export HTTPS_PROXY=${proxy_url}
 export http_proxy=$HTTP_PROXY
 export https_proxy=$HTTPS_PROXY
 export no_proxy=localhost
+echo "set git config http.proxy, https.proxy"
 git config --global http.proxy ${proxy_url}
 git config --global https.proxy ${proxy_url}
+echo "set npm config proxy to $proxy_url"
 npm config set proxy ${proxy_url}
