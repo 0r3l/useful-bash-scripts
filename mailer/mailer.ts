@@ -4,9 +4,14 @@ import "dotenv/config";
 import fs from "fs";
 import path from "path";
 import readline from "readline";
+import { Address } from "nodemailer/lib/mailer";
+
+function isAddress(addr: string | Address){
+  return (addr as Address)?.address !== undefined
+}
 
 export const sendMail = async (
-  fromMail: string,
+  fromMail: string | Address,
   address: string,
   subject: string,
   text: string,
@@ -34,10 +39,12 @@ export const sendMail = async (
               pass: process.env.SMTP_PASS,
             },
           }
-    );
-
+    );    
     const mailOptions: SendMailOptions = {
-      from: fromMail,
+      from: {
+        name: isAddress(fromMail) && (fromMail as Address).name  || fromMail as string,
+        address: isAddress(fromMail) && (fromMail as Address).address  || fromMail as string
+      } ,
       to: address,
       subject: subject,
       text: text,
@@ -68,7 +75,11 @@ function readConfigFile(filePath: string): any {
 }
 
 // Step 1: Define the email validation function
-function isValidEmail(email: string): boolean {
+function isValidEmail(addr: string | Address): boolean {
+  if(isAddress(addr) && (addr as Address).name === undefined){
+    throw Error("Error: from should configure as { name: 'sender name', address: 'sender email' }")
+  }
+  const email = isAddress(addr) && (addr as Address).address || addr as string;  
   const regex =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regex.test(email.toLowerCase());
@@ -85,7 +96,7 @@ if (args.length < 3) {
 const configFilePath = args[2];
 
 // Usage
-const config: { from: string; to: string; subject: string; body: string[] } =
+const config: { from: string | Address; to: string; subject: string; body: string[] } =
   readConfigFile(configFilePath);
 console.log(config); // For demonstration purposes
 const { from, to, subject, body } = config;
