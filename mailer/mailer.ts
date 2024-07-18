@@ -1,5 +1,6 @@
 import type { SendMailOptions } from "nodemailer";
 import nodemailer from "nodemailer";
+import 'dotenv/config'
 
 export const sendMail = async (
   fromMail: string,
@@ -16,7 +17,7 @@ export const sendMail = async (
       secure: false,
       auth: {
         user: user,
-        pass: "Sbg%jHr4&D",
+        pass: process.env.MAIL_SERVER_PASSWORD,
       },
     });
 
