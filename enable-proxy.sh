@@ -1,6 +1,9 @@
 #!/bin/zsh
 
-proxy_url=http://01uklopxy00.pst.cso.att.com:8080
+# london vpn: uklopxy00f.pst.cso.att.com
+
+
+proxy_url=http://sub.proxy.att.com:8888 #http://uklopxy00f.pst.cso.att.com:8080
 echo "export $proxy_url to HTTP_PROXY,HTTPS_PROXY,http_proxy,https_proxy no_proxy=localhost"
 export PATH=$HOME/development/flutter/bin:$PATH
 export HTTP_PROXY=${proxy_url}
