@@ -12,17 +12,29 @@ export const sendMail = async (
   text: string,
   html?: string
 ) => {
-  const user = "m05169-AP@MTA02.ATT-MAIL.COM";
+  const user = process.env.ATT ? "m05169-AP@MTA02.ATT-MAIL.COM" : "user@example.org";
+
   try {
-    const transporter = nodemailer.createTransport({
-      host: "mta02.az.3pc.att.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: user,
-        pass: process.env.MAIL_SERVER_PASSWORD,
-      },
-    });
+    const transporter = nodemailer.createTransport(
+      process.env.ATT
+        ? {
+            host: "mta02.az.3pc.att.com",
+            port: 587,
+            secure: false,
+            auth: {
+              user: user,
+              pass: process.env.MAIL_SERVER_PASSWORD,
+            },
+          }
+        : {
+            host: "app.debugmail.io",
+            port: 9025,
+            auth: {
+              user: user,
+              pass: process.env.SMTP_PASS,
+            },
+          }
+    );
 
     const mailOptions: SendMailOptions = {
       from: fromMail,
@@ -73,7 +85,7 @@ if (args.length < 3) {
 const configFilePath = args[2];
 
 // Usage
-const config: { from: string; to: string; subject: string; body: string } =
+const config: { from: string; to: string; subject: string; body: string[] } =
   readConfigFile(configFilePath);
 console.log(config); // For demonstration purposes
 const { from, to, subject, body } = config;
@@ -93,7 +105,7 @@ if (subject === "" || !subject) {
   process.exit(1);
 }
 
-if (body === "" || !body) {
+if (!body.length || !body) {
   console.error("body is empty");
   process.exit(1);
 }
@@ -105,12 +117,15 @@ const rl = readline.createInterface({
 });
 
 // Confirmation prompt before sending mail
-rl.question("Are you sure you want to send this email? (yes/no) (emailer for edit)", (answer) => {
-  if (answer.toLowerCase() === "yes") {
-    sendMail(from, to, subject, body);
-    console.log("Email sent successfully.");
-  } else {
-    console.log("Email sending canceled.");
+rl.question(
+  "Are you sure you want to send this email? (yes/no) (emailer for edit)",
+  async (answer) => {
+    if (answer.toLowerCase() === "yes") {
+      await sendMail(from, to, subject, body.join("\n"));
+      console.log("Email sent successfully.");
+    } else {
+      console.log("Email sending canceled.");
+    }
+    rl.close();
   }
-  rl.close();
-});
+);
