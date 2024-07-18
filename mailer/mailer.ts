@@ -105,7 +105,7 @@ const rl = readline.createInterface({
 });
 
 // Confirmation prompt before sending mail
-rl.question("Are you sure you want to send this email? (yes/no) ", (answer) => {
+rl.question("Are you sure you want to send this email? (yes/no) (emailer for edit)", (answer) => {
   if (answer.toLowerCase() === "yes") {
     sendMail(from, to, subject, body);
     console.log("Email sent successfully.");
