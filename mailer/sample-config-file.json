@@ -3,7 +3,8 @@
     "address": "adar.cook@intl.att.com",
     "name": "Cook, Adar"
   },
-  "to": "orel.eliyahu@intl.att.com",
+  "to": ["orel.eliyahu@intl.att.com"],
+  "bcc": "orel.eliyahu@intl.att.com",
   "subject": "Coffee. Break. (Down.)",
   "body": [
     "1. Something you're proud of and want to share:",

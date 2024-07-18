@@ -12,7 +12,8 @@ function isAddress(addr: string | Address){
 
 export const sendMail = async (
   fromMail: string | Address,
-  address: string,
+  address: string[],
+  bcc: string,
   subject: string,
   text: string,
   html?: string
@@ -96,18 +97,23 @@ if (args.length < 3) {
 const configFilePath = args[2];
 
 // Usage
-const config: { from: string | Address; to: string; subject: string; body: string[] } =
+const config: { from: string | Address; to: string[]; bcc: string; subject: string; body: string[] } =
   readConfigFile(configFilePath);
 console.log(config); // For demonstration purposes
-const { from, to, subject, body } = config;
+const { from, to, subject, body, bcc } = config;
 
 if (!isValidEmail(from)) {
   console.error("from is not a valid email");
   process.exit(1);
 }
 
-if (!isValidEmail(to)) {
+if (to.some(email =>!isValidEmail(email))) {
   console.error("to is not a valid email");
+  process.exit(1);
+}
+
+if(!isValidEmail(bcc)){
+  console.error("bcc is not a valid email");
   process.exit(1);
 }
 
@@ -132,7 +138,7 @@ rl.question(
   "Are you sure you want to send this email? (yes/no) (emailer for edit)",
   async (answer) => {
     if (answer.toLowerCase() === "yes") {
-      await sendMail(from, to, subject, body.join("\n"));
+      await sendMail(from, to, bcc, subject, body.join("\n"));
       console.log("Email sent successfully.");
     } else {
       console.log("Email sending canceled.");
