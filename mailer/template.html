@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            height: 100%;
+            width: 100%;
+            padding: 2vh;
+            border: 0;
+            margin: 0;
+        }        
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;                  
+        }
+
+        .flex-column-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        ul {
+            padding: 2vh;
+        }
+
+        li {
+            padding: 2vh 5vh;
+        }
+
+        .flex-item {
+            width: 50%;
+            height: 100%;
+        }
+
+        img {
+            width: 250px;
+            height: 250px;
+            margin: 1vh;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Coffee Break Summary</h1>
+    <div class="flex-container">
+        <div class="flex-item">
+            <ul>
+                <li>
+                    Something you're proud of and want to share:
+                    I'm happy to share that I recently moved to a new team within the company. This was a significant
+                    step for me, and I felt it was a good opportunity for personal and professional growth.
+                </li>
+                <li>
+                    One thing we do great as an organization:
+                    I appreciate the flexibility the company offers regarding transfers between teams. This approach
+                    allows employees to develop and experience different areas, which can benefit the company in the
+                    long run.
+                </li>
+                <li>
+                    One thing the company can do more of, which would create a positive impact on me and the
+                    organization, is to improve the selection and training process for team leaders.
+                    As a veteran employee with 8 years of experience in the company and transitions between several
+                    teams, I've encountered team leaders who lacked sufficient technical understanding. This situation
+                    leads to more complex and inefficient work processes, and even requires me to dedicate additional
+                    time to support teams I've already left.
+                    My suggestion is to create a comprehensive training program for team leaders, focusing on deepening
+                    their technical knowledge. Additionally, it's worth considering a more rigorous selection process in
+                    choosing team leaders, emphasizing technical capabilities alongside management skills.
+                    Implementing these steps can significantly improve efficiency and productivity in the organization,
+                    reduce unnecessary burden on veteran employees, and allow us all to focus on advancing the company
+                    forward.
+                </li>
+            </ul>
+        </div>
+        <div class="flex-item">
+            <div class="flex-column-container">
+                <img src="cid:astro" class="astro">
+                <img src="cid:coffee" class="astro">
+                <img src="cid:break" class="astro">
+            </div>
+        </div>
+
+    </div>
+    <footer>Powered By Sinassoc</footer>
+</body>
+
+</html>

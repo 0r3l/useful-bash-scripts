@@ -5,17 +5,23 @@
   },
   "to": ["orel.eliyahu@intl.att.com"],
   "bcc": "orel.eliyahu@intl.att.com",
-  "subject": "Coffee. Break. (Down.)",
-  "body": [
-    "1. Something you're proud of and want to share:",
-    "I'm happy to share that I recently moved to a new team within the company. This was a significant step for me, and I felt it was a good opportunity for personal and professional growth.",
-    "\n",
-    "2. One thing we do great as an organization:",
-    "I appreciate the flexibility the company offers regarding transfers between teams. This approach allows employees to develop and experience different areas, which can benefit the company in the long run.",
-    "\n",
-    "3. One thing the company can do more of, which would create a positive impact on me and the organization, is to improve the selection and training process for team leaders.",
-    "As a veteran employee with 8 years of experience in the company and transitions between several teams, I've encountered team leaders who lacked sufficient technical understanding. This situation leads to more complex and inefficient work processes, and even requires me to dedicate additional time to support teams I've already left.",
-    "My suggestion is to create a comprehensive training program for team leaders, focusing on deepening their technical knowledge. Additionally, it's worth considering a more rigorous selection process in choosing team leaders, emphasizing technical capabilities alongside management skills.",
-    "Implementing these steps can significantly improve efficiency and productivity in the organization, reduce unnecessary burden on veteran employees, and allow us all to focus on advancing the company forward."
+  "subject": "Coffee. Break.",
+  "attachments": [
+    {
+      "filename": "rinat_astronaut.png",
+      "path": "/Users/oe530k/git-private/useful-bash-scripts/mailer/attachments/rinat_astronaut.png",
+      "cid": "astro"
+    },
+    {
+      "filename": "rinat_cofee_break.png",
+      "path": "attachments/rinat_cofee_break.png",
+      "cid": "break"
+    },
+    {
+      "filename": "rinat_drinking_coffee.png",
+      "path": "/Users/oe530k/git-private/useful-bash-scripts/mailer/attachments/rinat_drinking_coffee.png",
+      "cid": "coffee"
+    }
+
   ]
 }
